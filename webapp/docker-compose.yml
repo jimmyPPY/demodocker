@@ -1,0 +1,18 @@
+db:
+    image: mysql/mysql-server:5.7
+    ports:
+        - "3306:3306"
+    environment:
+        - "MYSQL_ROOT_PASSWORD=passe"
+        - "MYSQL_USER=root"
+        - "MYSQL_PASSWORD=passe"
+        - "MYSQL_DATABASE=mysql"
+mywebapp:
+    build: ./
+    ports:
+        - "80:80"
+    volumes:
+        - "$HOME/demodocker/webapp:/var/www/html:rw"
+    links:
+        - "db:db"
+    working_dir: "/home/docker"
